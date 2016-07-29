@@ -1,23 +1,23 @@
-/* 
- Ideas for React components: 
+/*
+ Ideas for React components:
 
 	Wait on implementing swappable pairs
 
    Pairs box
       Methods: Render, swapPair, savePairs, createPairs
-      Children: 
+      Children:
          Pair
             Methods: Render, updatePair, deletePair
             Children:
                Student
                   Methods: Render, updatePairedWith, updateDriver
 
-	Drag and drop to swap pairs, or manually type name? Click to select and auto-swap? Press button to swap? 
+	Drag and drop to swap pairs, or manually type name? Click to select and auto-swap? Press button to swap?
 
     StudentList
       Methods: Render, deleteStudent, editStudent
       Children:
-        Student 
+        Student
            Methods: Render, handleEdit, update[name, exp, pairedWith]
 
 */
@@ -53,6 +53,9 @@
 			Student.clearPairs();
 			Student.main();
 		});
+		$('#delAll').on('click', function(e){
+			Student.deleteStudent();
+		});
 
 		$('#save').on('click', function(e){
 			studentView.clearData('#students li');
@@ -70,7 +73,7 @@
 			$exp = $(this).val();
 			$name = $(this).parent().data('name');
 			Student.updateExp($name, $exp);
-			//update exp in view 
+			//update exp in view
 			$(this).siblings('.stuExp').html($exp);
 		});
 	}

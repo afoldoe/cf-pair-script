@@ -14,17 +14,17 @@
   	<main>
   	    <script id="pair-template" type="text/x-handlebars-template">
   	   		<tr class="pair">
-	        	<td>{{driver}}</td>
-	            <td>{{navigator}}</td>
+	        	<td>{{driver.name}}: {{driver.exp}}</td>
+	            <td>{{navigator.name}}:  {{navigator.exp}}</td>
 	            {{#if navigator2}}
-	            	<td>{{navigator2}}</td>
+	            	<td>{{navigator2.name}}: {{navigator.exp}}</td>
 	            {{/if}}
             </tr>
       	</script>
       	<script id="student-template" type="text/x-handlebars-template">
-	        	<li data-name="{{name}}">Name: {{name}}, Experience: <span class="stuExp">{{exp}}</span>  
-	        	<select class="exp">	
-	        		<option>Change</option>	
+	        	<li data-name="{{name}}">Name: {{name}}, Experience: <span class="stuExp">{{exp}}</span>
+	        	<select class="exp">
+	        		<option>Change</option>
 	        	 	<option>1</option>
 	        	 	<option>2</option>
 	        	 	<option>3</option>
@@ -45,6 +45,7 @@
   		<section>
   			<h4>Students</h4>
         <button id="pop" title="Load students from JSON file and put them in the DB">Populate Students</button>
+        <button id="delAll">Delete All</button>
   			<ul id="students">
   			</ul>
   		</section>

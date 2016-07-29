@@ -76,10 +76,10 @@
 	console.log("pairs", pairs);
 	pairs = []; //clear pairs
 	console.log("pairs length", pairs.length);
-	
+
 	//Run sort and randomize again on Students array and pass that in to creatPairs again.
 	sortedStudents = Student.sorted(students);
-	
+
 	Student.overPairedWith(sortedStudents);
 	Student.createPairs(sortedStudents);
   }
@@ -147,9 +147,9 @@
 		url:  url,
 		contentType: "application/json",
 		data: JSON.stringify({"id": student.id,
-							  "name": student.name, 
-							  "exp": student.exp, 
-							  "driver": student.driver, 
+							  "name": student.name,
+							  "exp": student.exp,
+							  "driver": student.driver,
 							  "driverCount": student.driverCount,
 							  "pairedWith": student.pairedWith}),
 		success: function(data, msg, xhr){
@@ -185,6 +185,7 @@
 
 	Student.putStudent = function(student){
 		var put = constructAjax();
+		students.push( student );
 		put('post', student);
 	}
 
@@ -204,7 +205,7 @@
 
 	Student.storeStudents = function(){
 		var flat = flatten();
-		
+
 		flat.forEach(function(student){
 			Student.updateStudent(student);
 		})
@@ -262,9 +263,9 @@
 
 		//take the first student in the array. Loop over the array until we find someone to pair with
 		//Needs to be a for loop so we can break and continue
-		//BUG: If there's an array where a person has paired with everyone 
-		//left in the array (and is therefore unpairable), the loop will exit with i at the 
-		//array.length and call splicedArray with i of the length of the array. Then splice() 
+		//BUG: If there's an array where a person has paired with everyone
+		//left in the array (and is therefore unpairable), the loop will exit with i at the
+		//array.length and call splicedArray with i of the length of the array. Then splice()
 		//does nothing and we lose someone from the beginning of the array. <- Possibly fixed?
 		for(var i = 1; i<arr.length; i++) {
 
@@ -276,7 +277,7 @@
 			break;
 		}
 
-		//can we break this out into another function? 
+		//can we break this out into another function?
 		if (i === arr.length){
       		reRunCreate();
     	};
@@ -298,7 +299,7 @@
 		});
 
 		students[index].exp = val;
-		Student.updateStudent(students[index]);	
+		Student.updateStudent(students[index]);
 
 	}
 
@@ -320,6 +321,7 @@
 	Student.main = function(callback){
 
 		var sortedStudents = Student.sorted(students);
+
 		Student.overPairedWith(sortedStudents);
 		Student.createPairs(sortedStudents);
 
@@ -327,13 +329,13 @@
 			Student.designateDriver(pair)
 
 			if(pair[2]){
-				var pairLiteral = {driver: pair[0].name,
-						   		   navigator: pair[1].name,
-						           navigator2: pair[2].name
+				var pairLiteral = {driver: pair[0],
+						   		   navigator: pair[1],
+						           navigator2: pair[2]
 						   		  };
 			}else{
-				var pairLiteral = {driver: pair[0].name,
-						   	   	   navigator: pair[1].name
+				var pairLiteral = {driver: pair[0],
+						   	   	   navigator: pair[1]
 						      	  };
 			}
 
